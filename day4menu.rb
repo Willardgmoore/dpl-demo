@@ -3,25 +3,64 @@
 # Lunch Lady
 # User Experience:
 def welcome
-print "
+  print "
   Welcome to the Church and State Cafeteria...
   The typical meal comes with a main entree and 2 side items.
   Would you like to hear our entree selection?"
-  user_input
+  if yn_input
+    entree
+  else
+    puts "Thanks for stopping by."
+  end
 end
 
-def user_input
-
+def yn_input
+  puts "Y/N"
+  input = gets.chomp.upcase
+  return true if input == 'Y'
 end
+
+# def print_menu(food)    
+# I think this method needs to define set values for input!!!!
+#   food.length.times do |choice_number|  # Going to need a way to quantify how manu menus to output.
+#     puts "#{(choice_number + 1).to_s}. #{food[(choice_number + 1).to_s][0]} 
+#     - #{food[(choice_number + 1).to_s][1]}
+#     - #{food[(choice_number + 1).to_s][2]}"
+#   end 
+# end
+
+
+
 
 def entree
+  @menu['entree'].length.times do |number|
+    puts "#{@menu['entree'][(number)]}    $ #{@menu['entree_price'][(number)]}"
+  end
 end
 
-def sides
+def side
+  @menu['side'].length.times do |number|
+    puts "#{@menu['side'][(number)]}    $ #{@menu['side_price'][(number)]}"
+  end
 end
 
-def price
-end
+@menu = {
+  'entree' => ['Fried Chicken', 'Roast Turkey', 'Meat Loaf', 'Chicken Pot Pie', 'Daily special'],
+  'side' => ['Baked Potatoe', 'Green Salad', 'Cup of Fruit', 'Mac and Cheese'],
+  'entree_price' => [11.50, 12.50, 8.80, 9.95, 7.00],
+  'side_price' => [2.50, 2.50, 2.50, 2.50]
+}
+# puts "#{@menu['entree'][0..3]} #{@menu['entree_price'][0..3]}" #diag
+# puts "#{@menu['side'][0..3]} #{@menu['side_price'][0..3]}" # diag
+
+# puts "Test" # diag
+
+# @menu.length.times do |number|
+#   puts "#{@menu[(number)]}"
+
+
+
+
 
 
 # First, choose an entree.
@@ -70,17 +109,9 @@ end
 #   - Create a seperate lunch and dinner options. The first question to the user could be whether they are here for lunch or dinner. Then they will be able to choose from the appropriate menus. (This will require new hashes to be added inside of the menu hash)
 #   - Have the user begin with a limited amount of money in their wallet. Don't allow them to order more than they can pay for. Tell them the remaining value in their wallets after they purchase their meal.
 
-@menu = {
-  'entree' => ['Fried Chicken', 'Roast Turkey', 'Meat Loaf', 'Chicken Pot Pie'],
-  'side' => ['Baked Potatoe', 'Green Salad', 'Cup of Fruit', 'Mac and Cheese'],
-  'entree_price' => [11.50, 12.50, 8.80, 9.95],
-  'side_price' => [2.50, 2.50, 2.50, 2.50]
-}
-puts "#{@menu['entree'][0..3]} #{@menu['entree_price'][0..3]}"
-puts "#{@menu['side'][0..3]} #{@menu['side_price'][0..3]}"
-
-puts "Test"
 
 
+
+welcome
 
 
