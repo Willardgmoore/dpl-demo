@@ -5,7 +5,13 @@
 def welcome
 print "
   Welcome to the Church and State Cafeteria...
-  The typical meal comes with a main entree and 2 side items."
+  The typical meal comes with a main entree and 2 side items.
+  Would you like to hear our entree selection?"
+  user_input
+end
+
+def user_input
+
 end
 
 def entree
@@ -15,6 +21,8 @@ def sides
 end
 
 def price
+end
+
 
 # First, choose an entree.
 #   Here is a list of entrees you may choose from:"
@@ -63,7 +71,16 @@ def price
 #   - Have the user begin with a limited amount of money in their wallet. Don't allow them to order more than they can pay for. Tell them the remaining value in their wallets after they purchase their meal.
 
 @menu = {
-  entree = ['Fried Chicken', 'Roast Turkey', 'Meat Loaf', 'Chicken Pot Pie'],
-  side = ['Baked Potatoe', 'Green Salad', 'Cup of Fruit', 'Mac and Cheese']
+  'entree' => ['Fried Chicken', 'Roast Turkey', 'Meat Loaf', 'Chicken Pot Pie'],
+  'side' => ['Baked Potatoe', 'Green Salad', 'Cup of Fruit', 'Mac and Cheese'],
+  'entree_price' => [11.50, 12.50, 8.80, 9.95],
+  'side_price' => [2.50, 2.50, 2.50, 2.50]
 }
-puts "#{@menu[entree]}"
+puts "#{@menu['entree'][0..3]} #{@menu['entree_price'][0..3]}"
+puts "#{@menu['side'][0..3]} #{@menu['side_price'][0..3]}"
+
+puts "Test"
+
+
+
+
