@@ -7,41 +7,31 @@ def welcome
   Welcome to the Church and State Cafeteria...
   The typical meal comes with a main entree and 2 side items.
   Would you like to hear our entree selection?"
-  if yn_input
-    entree
-  else
-    puts "Thanks for stopping by."
-  end
 end
 
-def yn_input
+def yes_no_input
   puts "Y/N"
   input = gets.chomp.upcase
   return true if input == 'Y'
 end
 
-# def print_menu(food)    
-# I think this method needs to define set values for input!!!!
-#   food.length.times do |choice_number|  # Going to need a way to quantify how manu menus to output.
-#     puts "#{(choice_number + 1).to_s}. #{food[(choice_number + 1).to_s][0]} 
-#     - #{food[(choice_number + 1).to_s][1]}
-#     - #{food[(choice_number + 1).to_s][2]}"
-#   end 
-# end
 
-
-
-
-def entree
+def list_entree
   @menu['entree'].length.times do |number|
     puts "#{@menu['entree'][(number)]}    $ #{@menu['entree_price'][(number)]}"
   end
 end
 
-def side
+def list_side
   @menu['side'].length.times do |number|
     puts "#{@menu['side'][(number)]}    $ #{@menu['side_price'][(number)]}"
   end
+end
+
+def get_order(input)
+  #input is text and var is numeric value of what cu desires
+  puts "#{@menu['entree']}"
+#  puts "Great, You ordered #{@menu['side'][(var)]} with #{@menu['side'][(var)]} and #{@menu['side'][(var)]}."
 end
 
 @menu = {
@@ -60,6 +50,8 @@ end
 
 
 
+def food_choice
+end
 
 
 
@@ -111,7 +103,19 @@ end
 
 
 
+def run     # This is supposed to organize the whole project in an overview and then be called.
+  welcome
 
-welcome
+  if yes_no_input
+    list_entree
+  else
+    puts "Thanks for stopping by."
+    exit
+  end
+  puts "What would you like?"
+  get_order(gets.chomp)
+
+end
 
 
+run
