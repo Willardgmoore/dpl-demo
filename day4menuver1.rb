@@ -2,20 +2,25 @@
 
 # Lunch Lady
 # User Experience:
+@ticket = []
+@ticket_cost = []
+
 def welcome
   print "
   Welcome to the Church and State Cafeteria...
   The typical meal comes with a main entree and 2 side items.
-  Would you like to hear our entree selection?"
+  Would you like to hear our entree selection?  'Y/N'
+  "
 end
 
 def yes_no_input
-  puts "Y/N"
   input = gets.chomp.upcase
   return true if input == 'Y'
   return false if input =='N'
+else
+  puts "this is a 'Y'/'N' question! How could you mess that up?"
+  yes_no_input
 end
-
 
 def list_entree
   @menu['entree'].length.times do |number|
@@ -29,69 +34,64 @@ def list_side
   end
 end
 
-def get_entree(get_order)#!!! It doesn't look like input is working, wrong syntax???
+def get_entree#!!! It doesn't look like input is working, wrong syntax???
   #input is text and var is numeric value of what cu desires
   puts "Please select your entree: "
-  get_order = gets.to_i
-  puts "#{@menu['entree'][(get_order)]}"
-  entree_choice = "#{@menu['entree'][(get_order)]}"
-#  puts "Great, You ordered #{@menu['side'][(var)]} with #{@menu['side'][(var)]} and #{@menu['side'][(var)]}."
+  @get_order = gets.to_i
+  puts "#{@menu['entree'][(@get_order)]}"
+  @entree_choice = "#{@menu['entree'][(@get_order)]}"
+  #  puts "Great, You ordered #{@menu['side'][(var)]} with #{@menu['side'][(var)]} and #{@menu['side'][(var)]}."
+  @ticket << @entree_choice
+  @ticket_cost << @menu['entree_price'][(@get_order)]
 end
 
-def get_side(choice_s) #trying another method without input
+def get_side#!!! It doesn't look like input is working, wrong syntax???
   #input is text and var is numeric value of what cu desires
-  puts "Please select your side: "
-  choice_s = gets.to_i
-  puts "#{@menu['side'][(shoice_s)]}"
-#  puts "Great, You ordered #{@menu['side'][(var)]} with #{@menu['side'][(var)]} and #{@menu['side'][(var)]}."
+  puts "Please select your entree: "
+  @get_order = gets.to_i
+  puts "#{@menu['side'][(@get_order)]}"
+  @side_choice = "#{@menu['side'][(@get_order)]}"
+  #  puts "Great, You ordered #{@menu['side'][(var)]} with #{@menu['side'][(var)]} and #{@menu['side'][(var)]}."
+  @ticket << @side_choice
+  @ticket_cost << @menu['side_price'][(@get_order)]
 end
 
 @menu = {
-  'order' => [0, 1, 2, 3, 4, 5],
+  'order' => [0, 1, 2, 3, 4, 5],    # I don't think this is being used for anything ##############
   'entree' => ['Chicken', 'Roast Turkey', 'Meat_Loaf', 'Chicken Pot Pie', 'Daily special'],
-  'side' => ['Baked Potatoe', 'Green Salad', 'Cup of Fruit', 'Mac and Cheese'],
+  'side' => ['Baked Potato', 'Green Salad', 'Cup of Fruit', 'Mac and Cheese'],
   'entree_price' => [11.50, 12.50, 8.80, 9.95, 7.00],
   'side_price' => [2.50, 2.50, 2.50, 2.50]
 }
-# puts "#{@menu['entree'][0..3]} #{@menu['entree_price'][0..3]}" #diag
-# puts "#{@menu['side'][0..3]} #{@menu['side_price'][0..3]}" # diag
 
-# puts "Test" # diag
-
-# @menu.length.times do |number|
-#   puts "#{@menu[(number)]}"
-
-
-
-def food_choice
+def order_entree
+  list_entree
+  get_entree
 end
 
-#def run #diag    # This is supposed to organize the whole project in an overview and then be called.
+def order_side
+  list_side
+  get_side
+end
+
+def run     # This is supposed to organize the whole project in an overview and then be called.
   welcome
   choice_1 = yes_no_input
   if choice_1
-    list_entree
-    puts "What entree would you like?"
-    get_order = get_entree(gets.to_i)
-  elsif choice_1 == false 
-    puts "Maybe a side then:"
-    list_side
-    puts "What side would you like?"
-    get_order = get_side(gets.to_i)
+    order_entree
+  elsif  choice_1 == false
+    puts "Maybe a side then?"
+    order_side
   else
-    puts "We don't serve windows users here."
+    puts "Who do you think you are?!? Get outta here!"
   end
-  puts "Ran if else loop" #diag
-  puts "You ordered #{get_order}"
+  # puts "Ran if else loop" #diag
+  puts "You ordered #{@ticket} for #{@ticket_cost} "
+end
+
+run 
 
 
-  #  puts "Thanks for stopping by." #Put inside if loop for now.
-  #  exit
-
-#end #diag
-
-
-#run #diag
 
 # First, choose an entree.
 #   Here is a list of entrees you may choose from:"
