@@ -13,29 +13,42 @@ def yes_no_input
   puts "Y/N"
   input = gets.chomp.upcase
   return true if input == 'Y'
+  return false if input =='N'
 end
 
 
 def list_entree
   @menu['entree'].length.times do |number|
-    puts "#{@menu['entree'][(number)]}    $ #{@menu['entree_price'][(number)]}"
+    puts "#{@menu['order'][(number)]}. #{@menu['entree'][(number)]}  $ #{@menu['entree_price'][(number)]}"
   end
 end
 
 def list_side
   @menu['side'].length.times do |number|
-    puts "#{@menu['side'][(number)]}    $ #{@menu['side_price'][(number)]}"
+    puts "#{@menu['order'][(number)]}. #{@menu['side'][(number)]}  $ #{@menu['side_price'][(number)]}"
   end
 end
 
-def get_order(input)
+def get_entree(order)#!!! It doesn't look like input is working, wrong syntax???
   #input is text and var is numeric value of what cu desires
-  puts "#{@menu['entree']}"
+  puts "Please select your entree: "
+  order = gets.to_i
+  puts "#{@menu['entree'][(order)]}"
+  get_entree = @menu['entree'][(order)]
+#  puts "Great, You ordered #{@menu['side'][(var)]} with #{@menu['side'][(var)]} and #{@menu['side'][(var)]}."
+end
+
+def get_side(choice_s) #trying another method without input
+  #input is text and var is numeric value of what cu desires
+  puts "Please select your side: "
+  choice_s = gets.to_i
+  puts "#{@menu['side'][(choice_s)]}"
 #  puts "Great, You ordered #{@menu['side'][(var)]} with #{@menu['side'][(var)]} and #{@menu['side'][(var)]}."
 end
 
 @menu = {
-  'entree' => ['Fried Chicken', 'Roast Turkey', 'Meat Loaf', 'Chicken Pot Pie', 'Daily special'],
+  'order' => [0, 1, 2, 3, 4, 5],
+  'entree' => ['Chicken', 'Roast Turkey', 'Meat_Loaf', 'Chicken Pot Pie', 'Daily special'],
   'side' => ['Baked Potatoe', 'Green Salad', 'Cup of Fruit', 'Mac and Cheese'],
   'entree_price' => [11.50, 12.50, 8.80, 9.95, 7.00],
   'side_price' => [2.50, 2.50, 2.50, 2.50]
@@ -53,7 +66,32 @@ end
 def food_choice
 end
 
+#def run #diag    # This is supposed to organize the whole project in an overview and then be called.
+  welcome
+  choice_1 = yes_no_input
+  if choice_1
+    list_entree
+    puts "What entree would you like?"
+    get_entree
+  elsif choice_1 == false 
+    puts "Maybe a side then:"
+    list_side
+    puts "What side would you like?"
+    get_side
+  else
+    puts "We don't serve windows users here."
+  end
+  puts "Ran if else loop" #diag
+  puts "You ordered #{entree_choice}"
 
+
+  #  puts "Thanks for stopping by." #Put inside if loop for now.
+  #  exit
+
+#end #diag
+
+
+#run #diag
 
 # First, choose an entree.
 #   Here is a list of entrees you may choose from:"
@@ -100,22 +138,3 @@ end
 #   - Allow the user to add-on additional side items.
 #   - Create a seperate lunch and dinner options. The first question to the user could be whether they are here for lunch or dinner. Then they will be able to choose from the appropriate menus. (This will require new hashes to be added inside of the menu hash)
 #   - Have the user begin with a limited amount of money in their wallet. Don't allow them to order more than they can pay for. Tell them the remaining value in their wallets after they purchase their meal.
-
-
-
-def run     # This is supposed to organize the whole project in an overview and then be called.
-  welcome
-
-  if yes_no_input
-    list_entree
-  else
-    puts "Thanks for stopping by."
-    exit
-  end
-  puts "What would you like?"
-  get_order(gets.chomp)
-
-end
-
-
-run
