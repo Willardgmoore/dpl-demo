@@ -67,11 +67,21 @@ end
 def order_entree
   list_entree
   get_entree
+  puts "Would you like another entree?"
+  if yes_no_input
+    order_entree
+  else order_side
+  end
 end
 
 def order_side
+  puts "Our side items are: "
   list_side
   get_side
+  puts "Would you like another side?"
+  if yes_no_input
+    order_side
+  end
 end
 
 def run     # This is supposed to organize the whole project in an overview and then be called.
@@ -86,7 +96,13 @@ def run     # This is supposed to organize the whole project in an overview and 
     puts "Who do you think you are?!? Get outta here!"
   end
   # puts "Ran if else loop" #diag
-  puts "You ordered #{@ticket} for #{@ticket_cost} "
+  
+  total = 0
+  @ticket_cost.each do |cost|
+    total += cost
+  end
+  
+  puts "You ordered #{@ticket} for #{total} "
 end
 
 run 
